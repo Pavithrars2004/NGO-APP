@@ -1,0 +1,79 @@
+<!-- Container -->
+<div class="min-h-screen bg-[#f5f7fa] pt-24 px-6 md:px-16 font-['Poppins']">
+
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-teal-700 mb-3">Post an Opportunity</h1>
+    <p class="text-gray-600 text-lg">Share meaningful volunteer opportunities with passionate changemakers.</p>
+  </div>
+
+  <!-- Form Section -->
+  <div class="bg-white shadow-lg rounded-2xl p-8 md:p-12 max-w-3xl mx-auto mb-16 border border-gray-100">
+    <h2 class="text-2xl font-semibold text-teal-700 mb-6 text-center">Add New Opportunity</h2>
+
+    <form (ngSubmit)="onSubmit()" #opportunityForm="ngForm" class="space-y-5">
+
+      <!-- Title -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-2">Opportunity Title</label>
+        <input type="text" [(ngModel)]="newOpportunity.title" name="title" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-2">Description</label>
+        <textarea [(ngModel)]="newOpportunity.description" name="description" required rows="4"
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-2">Location</label>
+        <input type="text" [(ngModel)]="newOpportunity.location" name="location" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+      </div>
+
+      <!-- Date -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-2">Date</label>
+        <input type="date" [(ngModel)]="newOpportunity.date" name="date" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit"
+          class="bg-gradient-to-r from-teal-600 to-cyan-500 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all">
+          Post Opportunity
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Posted Opportunities Section -->
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-teal-700 mb-8 text-center">Posted Opportunities</h2>
+
+    <!-- Cards Grid -->
+    <div *ngIf="opportunities.length > 0; else noData" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div *ngFor="let opp of opportunities"
+        class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 border border-gray-100 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-bold text-teal-700 mb-2">{{ opp.title }}</h3>
+          <p class="text-gray-600 mb-4">{{ opp.description }}</p>
+          <p class="text-gray-500 text-sm"><strong>📍 Location:</strong> {{ opp.location }}</p>
+          <p class="text-gray-500 text-sm"><strong>📅 Date:</strong> {{ opp.date | date }}</p>
+        </div>
+        <button (click)="deleteOpportunity(opp)"
+          class="mt-4 text-sm bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="text-center text-gray-500 mt-8">No opportunities posted yet. Add one above!</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+nav {
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  transition: color 0.3s ease;
+}
+
+a.active-link {
+  color: #FFD54F; /* soft yellow for active links */
+}
+
+@media (max-width: 768px) {
+  .mobile-menu {
+    animation: slideDown 0.3s ease-in-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
